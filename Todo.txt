@@ -1,0 +1,13 @@
+- Loginsysteem / Werkt deels.. kan het probleem niet vinden.
+- Afdeling toevoegen / werkt
+- Afdelingen bekijken 
+- Object toevoegen /werkt 
+- Objecten Bekijken
+- Login pagina / Ik heb een simpele pagina gemaakt, moet nog mooi gemaakt worden.
+
+Misschien dat object en afdeling samengevoegd moeten worden met een item class.. IDK
+Niet veel hulp te vinden om deze tijd in de nacht. :D
+Ook hebben we een dropdown <select> ding nodig waar alle afdelingen in staan uit de database.. 
+Hier moet iemand naar kjken die goed is in javascript ofzo :P
+Afdeling en objecten bekijken is niet veel werk denk ik en kunnen waarschijnlijk zelfde functie gebruiken
+Alles van mij moet nog gecomment worden, dit lijkt me niet de hoogste prioriteit te hebben.

@@ -1,0 +1,144 @@
+@charset "UTF-8";
+/* CSS Document */
+
+html, body {
+margin:0;
+padding:0;
+height:100%;
+background-color:#f4f4f4;
+font-family: Calibri, "Calibri Bold", "Calibri Bold Italic", "Calibri Italic";
+}
+
+#wrapper{ 
+width:1280px; 
+height:800px; 
+float:left;
+}
+
+#wrapper_background{ 
+width:1280px; 
+height:800px; 
+float:left;
+background-image:url(afbeeldingen/halvecirkel.png);
+background-repeat:no-repeat;
+background-position:center;
+background-position:left;
+}
+
+#header_wrapper{ 
+width:1230px; 
+height:120px; 
+margin-left:25px;
+}
+
+#header_left{ 
+width:735px; 
+height:83px;
+float:left;
+margin-top:37px;
+background-image:url(afbeeldingen/logo.png);
+background-repeat:no-repeat;
+}
+
+#header_wrapper_right{ 
+width:475px; 
+height:120px; 
+float:right; 
+}
+
+#header_menu{ 
+width:475px; 
+height:40px; 
+}
+
+#header_status{ 
+width:475px; 
+height:55px; 
+}
+
+#content_main_wrapper{
+width:1230px; 
+height:620px;
+float:left; 
+margin-left:25px; 
+}
+	
+#sidebar_wrapper{ 
+width:395px; 
+height:620px; 
+float:left; 
+}
+
+#sidebar_left{ 
+width:180px; 
+height:620px; 
+float:left;}
+
+#sidebar_menu{ 
+width:215px; 
+height:620px; 
+float:right;}
+
+#content_wrapper{ 
+width:835px; 
+height:620px;
+float:left;
+background-image:url(afbeeldingen/contentback.png);
+}
+
+#content_subemenu{ 
+width:795px; 
+height:15px; 
+margin-left:auto; 
+margin-right:auto;
+margin-top:20px;
+}
+
+#content{ 
+width:795px; 
+height:540px; 
+margin-top:25px;
+margin-left:auto; 
+margin-right:auto;
+}
+
+#footer{ 
+width:1230px; 
+height:10px; 
+margin-left:25px;
+margin-top: 25px;
+float:left;
+font:calibri; font-size:12px; color:black; text-align:right; color:#1c3f94;
+}
+
+.titlepush{ height:6px;}
+.title { font: calibri; font-size: 68px; color:#1c3f94; margin-left:90px;}
+.naam { font: calibri; font-size: 26px; color:#1c3f94; text-align:right; font-weight:bold; }
+.login { font: calibri; font-size: 14px; color:#1c3f94; text-align:right; }
+
+#homeknop{ background-image:url(afbeeldingen/home_button.png); height:170px; width:170px; margin-top:195px;}
+#menu1{ height:47px; width:47px; background-image:url(afbeeldingen/menu_button.png); background-repeat:no-repeat; margin-left:0px; margin-top:122px;}
+#menu2{ height:47px; width:47px; background-image:url(afbeeldingen/menu_button.png); background-repeat:no-repeat; margin-left:15px; margin-top:189px;}
+#menu3{ height:47px; width:47px; background-image:url(afbeeldingen/menu_button.png); background-repeat:no-repeat; margin-left:20px; margin-top:20px;}
+#menu4{ height:47px; width:47px; background-image:url(afbeeldingen/menu_button.png); background-repeat:no-repeat; margin-left:15px; margin-top:20px;}
+#menu5{ height:47px; width:47px; background-image:url(afbeeldingen/menu_button.png); background-repeat:no-repeat; margin-left:0px; margin-top:20px;}
+
+#topmenu1{ height:36px; widhth:157px; margin-left:0px; background-image:url(afbeeldingen/instellingen.png); background-repeat:no-repeat; float:left;}
+#topmenu2{ height:36px; widhth:157px; margin-left:2px; background-image:url(afbeeldingen/faq.png); background-repeat:no-repeat; float:left;}
+#topmenu3{ height:36px; widhth:157px; margin-left:2px; background-image:url(afbeeldingen/uitloggen.png); background-repeat:no-repeat; float:left;}
+
+a.homebutton {display: block;float: left; height:170px; width:170px;}
+a.menu {display: block;float: left; height:40px; width:195px; padding-top:13px; padding-left: 60px; text-decoration:none; font-size:21px; color:#1c3f94;}
+a.topmenu{ display:block; height:36px; width:157px;}
+a{ color:#1c3f94; text-decoration:none;}
+
+h.content_header {float: left; text-decoration:none; font-size:21px; color:#1c3f94;}
+
+input {width:300px; margin-left:10px; margin-top:3px;}
+input.toevoegen {width:100px; margin-left:183px; margin-top:5px; }
+
+table.b{ font-size:14px;}
+tr.a{ font-weight:bold; margin-top:5px;}
+td.a{ width:150px;}
+
+
