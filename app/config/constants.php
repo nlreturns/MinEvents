@@ -44,7 +44,7 @@ define("FILE_DB_DATABASE",              DIR_CLASS."database.php");
 define("FILE_DB_PERSOON",               DIR_CLASS."db_persoon.php");
 define("FILE_GEBRUIKER",                DIR_CLASS."gebruiker.php");
 define("FILE_PERSOON",                  DIR_CLASS."persoon.php");
-define("FILE_AFDELING",                 DIR_CLASS."afdeling.php");
+define("FILE_AFDELING",                 DIR_CLASS."Afdeling.php");
 define("FILE_OBJECT",                   DIR_CLASS."object.php");
 define("FILE_PRIORITEIT",               DIR_CLASS."prioriteit.php");
 /* Message board status files */

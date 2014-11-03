@@ -1,5 +1,5 @@
 <?php
-include_once 'classes/afdeling.php';
+include_once 'classes/Afdeling.php';
 ?>
 <form method="post" class="formulier">
     <h2>Ticketformulier</h2>

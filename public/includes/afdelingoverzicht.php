@@ -1,6 +1,6 @@
 <?php
 
-include_once 'classes/afdeling.php';
+include_once 'classes/Afdeling.php';
 $afdeling = new Afdeling();
 $afdeling_array = $afdeling->getList();
 

@@ -1,4 +1,7 @@
 <?php
+namespace Minevents\app\classes;
+
+
 include_once 'Item.php';
 /**
  * DbDomein connects the application to the database using Database.php

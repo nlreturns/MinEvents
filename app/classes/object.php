@@ -1,6 +1,6 @@
 <?php
 include_once 'db_object.php';
-include_once 'afdeling.php';
+include_once 'Afdeling.php';
 /**
  * 
  */
