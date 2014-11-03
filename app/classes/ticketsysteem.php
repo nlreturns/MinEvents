@@ -153,7 +153,7 @@ class TicketSysteem {
 
         if($this->ticket_status_id == 1){
             //ticket toegewezen
-            $this->message->newMessage("Er is een ticket aan u toegewezen: " . $this->titel, "http://localhost/minevents/index.php?page=tickets&subpage=toegewezentickets", $this->pers_id);
+            $this->message->newMessage("Er is een ticket aan u toegewezen: " . $this->titel, WWW_ROOT . "index.php?page=tickets&subpage=toegewezentickets", $this->pers_id);
         }elseif($this->ticket_status_id == 2){
             //naar verholpen
             $this->message->newMessage("Ticket heeft goedkeuring nodig: " . $this->titel, $this->ticket_id);

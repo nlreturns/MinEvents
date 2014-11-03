@@ -1,5 +1,5 @@
 <?php
-use minevents\app\classes\MessageBoard as Messageboard;
+use minevents\app\classes\MessageBoard;
 ?>
 <div id="dashboard">
     <div id="left">
@@ -7,20 +7,17 @@ use minevents\app\classes\MessageBoard as Messageboard;
             <?php
             
             $dashboard = new MessageBoard;
-            
-            $messages_personal = $dashboard->getUserMessageBoard($_SESSION['user_id']);
-            $messages_global = $dashboard->getUserMessageBoard();
-            
+
             echo '<h1>Globale berichten: </h1>';
-            foreach($messages_global as $global_message){
+            foreach($dashboard->getUserMessageBoard() as $global_message){
                 echo $global_message['msg_beschrijving'] . "<br />";
             }
             echo '<br />';
             echo '<br />';
             
             echo '<h1>Persoonlijke berichten: </h1>';
-            foreach($messages_personal as $personal_message){
-                echo "<a class='mblinks' href='" . $personal_message['msg_link'] . "'>" . $personal_message['msg_beschrijving'] . "</a><br />";
+            foreach($dashboard->getUserMessageBoard($_SESSION['user_id']) as $personal_message){
+                echo "<a class='mblinks' href='/" . $personal_message['msg_link'] . "'>" . $personal_message['msg_beschrijving'] . "</a><br />";
             }
             
             ?>

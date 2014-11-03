@@ -14,10 +14,9 @@
  * If the path is not found ad the following line to the config.php:
  *  ini_set('include_path', './' . PATH_SEPARATOR . "./common/". PATH_SEPARATOR . ini_get('include_path'));
  */
-set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] );
 
 
-define("WWW_ROOT",                      "");
+define("WWW_ROOT",                      $_SERVER['DOCUMENT_ROOT'] . '/github/minevents/public/');
 define("DIR_INCLUDE",                   WWW_ROOT."includes/");
 define("DIR_ADMIN",                     WWW_ROOT."admin/");
 define("DIR_ADMIN_INCLUDE",             DIR_ADMIN."includes/");

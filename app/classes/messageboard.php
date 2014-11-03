@@ -37,6 +37,7 @@ class MessageBoard extends Error {
      * @param int $from (person id or module id)
      * @param int $to   (receiver of this message)
      * @param timestamp $msg_deadline (optional)
+     * @return boolean
      */
     public function newMessage($msg_desc,$link,$to = null){
         $db_msgbrd = new DbMessageBoard();
