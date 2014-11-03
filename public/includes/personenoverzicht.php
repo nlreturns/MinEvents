@@ -1,5 +1,5 @@
 <?php
-include_once 'classes/persoon.php';
+use minevents\app\classes\Persoon as Persoon;
 $persoon = new Persoon();
 $persoon_array = $persoon->getPersoonList();
 $countArray = count($persoon_array);

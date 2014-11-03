@@ -1,6 +1,7 @@
 <?php
-include_once FILE_GEBRUIKER;
-include_once 'classes/recht.php';
+use minevents\app\classes\Gebruiker as Gebruiker;
+use minevents\app\classes\db\DbGebruiker as DbGebruiker;
+use minevents\app\classes\Recht as Recht;
 // @TODO put constant in constant file
 define("NEVER_LOGGED_IN", 2);
 // nieuwe instantie van Recht

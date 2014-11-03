@@ -1,6 +1,6 @@
 <?php
 
-include_once 'classes/object.php';
+use minevents\app\classes\Object as Object;
 $object = new Object();
 $object_array = $object->getList();
 

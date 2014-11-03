@@ -1,6 +1,5 @@
 <?php
-require_once 'error.php';
-require_once FILE_DB_ROOSTER_TIJDBLOK;
+namespace minevents\app\classes;
 /**
  * Description of tijdblok
  *

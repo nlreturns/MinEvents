@@ -1,5 +1,5 @@
 <?php
-
+namespace minevents\app\classes;
 /**
  * Only a limit for the number of array elements
  */

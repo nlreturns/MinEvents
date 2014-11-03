@@ -1,5 +1,6 @@
 <?php
-include_once 'classes/gebruiker.php';
+use minevents\app\classes\Gebruiker as Gebruiker;
+use minevents\app\classes\db\DbGebruiker as DbGebruiker;
 $gebruiker = new Gebruiker(new DbGebruiker());
 $gebruiker_array = $gebruiker->getGebruikerList();
 

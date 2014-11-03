@@ -1,4 +1,6 @@
-<?php include_once 'classes/messageboard.php'; ?>
+<?php
+use minevents\app\classes\MessageBoard as Messageboard;
+?>
 <div id="dashboard">
     <div id="left">
         <div id="messageboard">

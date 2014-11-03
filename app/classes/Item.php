@@ -1,5 +1,6 @@
 <?php
-include_once FILE_DB_ITEM;
+namespace minevents\app\classes;
+use minevents\app\classes\db\DbItem as DbItem;
 /**
  * DbDomein connects the application to the database using Database.php
  */

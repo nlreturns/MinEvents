@@ -9,9 +9,9 @@
  * @author Bjorn Faber
  * 
  */
-include_once 'classes/defs/constants.php';
-require_once FILE_DB_GEBRUIKER;
-include_once 'RechtBitfield.php';
+namespace minevents\app\classes;
+
+use minevents\app\classes\db\DbGebruiker;
 
 class Gebruiker {
 
@@ -59,6 +59,7 @@ class Gebruiker {
     /**
      * Dit is de constructor. Hier zet ik de klasse variabelen aan de hand
      * van  een parameter.
+     * @param $db
      */
     public function __construct(DbGebruiker $db = null) {
         $this->dbGebruiker = $db;
@@ -320,5 +321,9 @@ class Gebruiker {
         } else {
             return FALSE;
         }
-    }    
+    }
+
+    public function getGebruikerbyUsername($username) {
+        return $this->dbGebruiker->getGebruikerbyUsername($username);
+    }
 }

@@ -1,5 +1,6 @@
 <?php
-    include_once FILE_PERSOON;
+use minevents\app\classes\Gebruiker as Gebruiker;
+use minevents\app\classes\db\DbGebruiker as DbGebruiker;
 ?>
 <form method="post" name="form1" id="ticketform" action="#">    <h2>Persoon Toevoegen</h2>
     <table class="formulier">

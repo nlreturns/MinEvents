@@ -1,6 +1,6 @@
 <?php
-include_once 'db_object.php';
-include_once 'Afdeling.php';
+namespace minevents\app\classes;
+use minevents\app\classes\db\DbObject as DbObject;
 /**
  * 
  */

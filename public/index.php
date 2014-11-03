@@ -1,14 +1,21 @@
 <?php
-include_once 'classes/gebruiker.php';
-include_once 'classes/defs/constants.php';
-include FILE_CLASS_GEBRUIKERRECHTEN;
-include_once FILE_CLASS_LOGIN;
-include_once 'classes/RechtConstants.php';
+include_once '../app/core/SplClassLoader.php';
+include_once '../app/config/constants.php';
+include_once '../app/config/db_constants.php';
+$autoloader = new \minevents\app\core\SplClassLoader('minevents\app', '../../');
+$autoloader->register();
+
+use minevents\app\classes\RechtenConstants as RechtenConstants;
+use minevents\app\classes\Loginsysteem as Loginsysteem;
+use minevents\app\classes\Gebruiker as Gebruiker;
+use minevents\app\classes\db\DbGebruiker as DbGebruiker;
+use minevents\app\classes\GebruikerRecht as GebruikerRecht;
+
+
 $rechten = new RechtenConstants();
 $reflection = new ReflectionClass($rechten);
 $recht_array= $reflection->getConstants();
-$login = new Login;
-
+$login = new Loginsysteem();
 $gebruiker = new Gebruiker(new DbGebruiker());
 
 if (!$login->isloggedin()) {

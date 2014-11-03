@@ -1,4 +1,5 @@
 <?php
+namespace minevents\app\classes;
 class Mail {
     
     private $to;

@@ -8,7 +8,7 @@
  *
      */
 
-require_once 'db_recht.php';
+namespace minevents\app\classes;
 
 class Recht {
 

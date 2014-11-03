@@ -1,7 +1,6 @@
 <?php
-require_once 'error.php';
-require_once FILE_DB_MESSAGEBOARD;
-
+namespace minevents\app\classes;
+use minevents\app\classes\db\DbMessageBoard as DbMessageBoard;
 /**
  * This is the class that facilitates
  *  the messageboard functionality.

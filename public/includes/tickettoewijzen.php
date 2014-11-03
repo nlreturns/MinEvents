@@ -1,7 +1,7 @@
 <?php
 $all = get_defined_vars();
 //var_dump($all);
-include_once 'classes/ticketsysteem.php';
+use minevents\app\classes\TicketSysteem as Ticketsysteem;
 $ticket = new Ticketsysteem;
 $ticket_array = $ticket->getTicketArray();
 $countArray = count($ticket_array);

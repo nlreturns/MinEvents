@@ -6,7 +6,7 @@
  * @version 0.1
  */
 
-/* database.php */
+/* Database.php */
 define ("TXT_ERROR_EXECUTING", "Foutje tijdens uitvoeren van de query:");
 
 define ("TXT_ERROR",                    "Error: ");

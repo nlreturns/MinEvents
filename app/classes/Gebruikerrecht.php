@@ -1,7 +1,5 @@
 <?php
-include_once 'RechtBitfield.php';
-include_once 'gebruiker.php';
-include_once 'RechtGroep.php';
+namespace minevents\app\classes;
 
 /**
  * Class GebruikerRecht

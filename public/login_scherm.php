@@ -1,15 +1,18 @@
 <?php
-include_once 'classes/defs/constants.php'; 
-include_once 'classes/gebruiker.php';
-include_once FILE_CLASS_LOGIN;
+include_once '../app/core/SplClassLoader.php';
+include_once '../app/config/constants.php';
+include_once '../app/config/db_constants.php';
+$autoloader = new \minevents\app\core\SplClassLoader('minevents\app', '../../');
+$autoloader->register();
 // Nieuw object van Login class
-$login = new Login;
+$login = new \minevents\app\classes\Loginsysteem();
 // Controleer of gebruiker al ingelogd is, zoja ga dan naar de index pagina
 if($login->isloggedin()){
     header("Location: index.php");
     exit;
 } else {
 if(isset($_POST['inloggen'])) {
+    echo ':S';
     // username setten in Login class
 	$login->setUsername($_POST['gebruikersnaam']);
     // password setten in Login class

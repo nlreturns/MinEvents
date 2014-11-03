@@ -1,6 +1,5 @@
 <?php
-require_once 'error.php';
-require_once FILE_DB_MARKETING;
+namespace minevents\app\classes;
 
 /**
  * This is the class that facilitates

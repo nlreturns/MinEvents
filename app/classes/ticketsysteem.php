@@ -1,11 +1,8 @@
 <?php
 
-require_once 'error.php';
-require_once DIR_DEFINES . 'constants.php';
-require_once FILE_DB_TICKETSYSTEEM;
-require_once FILE_AFDELING;
-require_once FILE_OBJECT;
-require_once FILE_MESSAGEBOARD;
+namespace minevents\app\classes;
+use minevents\app\classes\Afdeling as Afdeling;
+use minevents\app\classes\db\DbTicket as DbTicket;
 
 /**
  * This is the class that facilitates
@@ -72,7 +69,7 @@ class TicketSysteem {
 
     public function __construct() {
         /**
-         * @var db New instnace of DbTicket
+         * @var db New instance of DbTicket
          */
         $this->db = new DbTicket();
         $this->afdeling = new Afdeling();
@@ -182,7 +179,12 @@ class TicketSysteem {
     }
 
     public function getAfdeling($afdelingid) {
-        return $this->afdeling->getAfdelingById($afdelingid);
+        if($result = $this->afdeling->getAfdelingById($afdelingid)) {
+            echo 'jaa het werkt';
+            return $result;
+        } else {
+            echo 'het werkt niet';
+        }
     }
 
     public function getObject($objectid) {

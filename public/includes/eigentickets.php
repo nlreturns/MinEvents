@@ -1,9 +1,7 @@
 <?php
-include_once 'classes/ticketsysteem.php';
+use minevents\app\classes\TicketSysteem as TicketSysteem;
 
 $all = get_defined_vars();
-//var_dump($all);
-include_once 'classes/ticketsysteem.php';
 $ticket = new Ticketsysteem;
 
 // SORTING TOTAL TABLE

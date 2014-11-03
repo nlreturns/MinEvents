@@ -1,5 +1,5 @@
 <?php
-    include_once FILE_PERSOON;
+use minevents\app\classes\Persoon as Persoon;
 ?>
 <form method="post" name="form1" id="ticketform" action="#">    <h2>Persoon Toevoegen</h2>
     <table class="formulier">

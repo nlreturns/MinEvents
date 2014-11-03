@@ -8,7 +8,8 @@
  * @author Bjorn Faber
  * 
  */
-require_once FILE_DB_PERSOON;
+namespace minevents\app\classes;
+use minevents\app\classes\db\DbPersoon as DbPersoon;
 
 class Persoon extends DbPersoon {
 

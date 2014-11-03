@@ -1,5 +1,5 @@
 <?php
-include_once 'classes/Afdeling.php';
+use minevents\app\classes\Afdeling as Afdeling;
 ?>
 <form method="post" class="formulier">
     <h2>Ticketformulier</h2>

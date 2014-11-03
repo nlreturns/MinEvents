@@ -1,8 +1,5 @@
 <?php
-namespace Minevents\app\classes;
-
-
-include_once 'Item.php';
+namespace minevents\app\classes;
 /**
  * DbDomein connects the application to the database using Database.php
  */
@@ -81,6 +78,7 @@ class Afdeling {
      * @return type array
      */
     public function getAfdelingById($afdeling_id){
+        echo 'Afdeling';
         return $this->db->getItemById($afdeling_id);
         
     }

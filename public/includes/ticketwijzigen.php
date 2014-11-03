@@ -1,8 +1,8 @@
 <?php
-include_once FILE_TICKETSYSTEEM;
-include_once FILE_AFDELING;
-include_once FILE_OBJECT;
-include_once FILE_PRIORITEIT;
+use minevents\app\classes\TicketSysteem as TicketSysteem;
+use minevents\app\classes\Afdeling as Afdeling;
+use minevents\app\classes\Prioriteit as Prioriteit;
+use minevents\app\classes\Object as Object;
 
 $object = new Object();
 $afdeling = new Afdeling();

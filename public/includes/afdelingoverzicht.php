@@ -1,6 +1,5 @@
 <?php
-
-include_once 'classes/Afdeling.php';
+use minevents\app\classes\Afdeling as Afdeling;
 $afdeling = new Afdeling();
 $afdeling_array = $afdeling->getList();
 

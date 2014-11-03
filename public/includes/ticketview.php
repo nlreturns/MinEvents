@@ -1,5 +1,5 @@
 <?php
-include_once FILE_TICKETSYSTEEM;
+use minevents\app\classes\TicketSysteem as TicketSysteem;
 $ticket = new TicketSysteem;
 $result = $ticket->getTicket($_GET['id']);
 ?>

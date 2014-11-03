@@ -1,9 +1,7 @@
 <?php
-include_once 'classes/ticketsysteem.php';
+use minevents\app\classes\TicketSysteem as TicketSysteem;
 
 $all = get_defined_vars();
-//var_dump($all);
-include_once 'classes/ticketsysteem.php';
 $ticket = new Ticketsysteem;
 $ticket_array = $ticket->getTicketArray('ticket_end_tijd', 'DESC');
 $countArray = count($ticket_array);
@@ -70,8 +68,6 @@ $countArray = count($ticket_array);
         }
             
         if (isset($_POST['id']) && isset($_POST['status'])) {
-
-            $ticket = new TicketSysteem();
             $current = $ticket->getTicketByID($_POST['id']);
             $ticket->__set('pers_id', $current['pers_id']);
             $ticket->__set('titel', $current['ticket_titel']);

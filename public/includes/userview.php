@@ -1,6 +1,6 @@
 <?php
-
-include_once 'classes/gebruiker.php';
+use minevents\app\classes\Gebruiker as Gebruiker;
+use minevents\app\classes\db\DbGebruiker as DbGebruiker;
 $recht_array = $reflection->getConstants();
 $gebruiker = new Gebruiker(new DbGebruiker());
 $user = $gebruiker->getGebruikerById($_GET['id']);

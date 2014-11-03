@@ -1,4 +1,4 @@
-<?php 
+<?php
 ?>
 <div id="subnav">
     <div id="halvecirkel">

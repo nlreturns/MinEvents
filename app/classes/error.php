@@ -1,4 +1,5 @@
 <?php
+namespace minevents\app\classes;
 /**
  * Description of Error
  *  Provide generic error handling class

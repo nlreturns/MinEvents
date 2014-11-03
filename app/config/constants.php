@@ -30,23 +30,23 @@ define("PAGE_HOME",                     "/index.php");
 define("PAGE_ADMIN",                    DIR_ADMIN."admin.php");
 
 
-define ("FILE_DATABASE",                DIR_CLASS."database.php");
-define ("FILE_DB_TYPE",                 DIR_CLASS."db_type.php");
+define ("FILE_DATABASE",                DIR_CLASS."Database.php");
+define ("FILE_DB_TYPE",                 DIR_CLASS."DbType.php");
 
 /* Main messageboard files */
-define("FILE_MESSAGEBOARD",             "messageboard.php");
+define("FILE_MESSAGEBOARD",             "Messageboard.php");
 define("FILE_CLASS_MESSAGEBOARD",       DIR_CLASS.FILE_MESSAGEBOARD);
 define("FILE_DB_MESSAGEBOARD",          DIR_CLASS."db_".FILE_MESSAGEBOARD);
 
 /* Gebruiker & Persoon*/
-define("FILE_DB_GEBRUIKER",             DIR_CLASS."db_gebruiker.php");
-define("FILE_DB_DATABASE",              DIR_CLASS."database.php");
-define("FILE_DB_PERSOON",               DIR_CLASS."db_persoon.php");
-define("FILE_GEBRUIKER",                DIR_CLASS."gebruiker.php");
-define("FILE_PERSOON",                  DIR_CLASS."persoon.php");
+define("FILE_DB_GEBRUIKER",             DIR_CLASS."DbGebruiker.php");
+define("FILE_DB_DATABASE",              DIR_CLASS."Database.php");
+define("FILE_DB_PERSOON",               DIR_CLASS."DbPersoon.php");
+define("FILE_GEBRUIKER",                DIR_CLASS."Gebruiker.php");
+define("FILE_PERSOON",                  DIR_CLASS."Persoon.php");
 define("FILE_AFDELING",                 DIR_CLASS."Afdeling.php");
-define("FILE_OBJECT",                   DIR_CLASS."object.php");
-define("FILE_PRIORITEIT",               DIR_CLASS."prioriteit.php");
+define("FILE_OBJECT",                   DIR_CLASS."Object.php");
+define("FILE_PRIORITEIT",               DIR_CLASS."Prioriteit.php");
 /* Message board status files */
 define("FILE_MESSAGEBOARD_STATUS",      "messageboard_status.php");
 define("FILE_DB_MESSAGEBOARD_STATUS",   DIR_CLASS."db_".FILE_MESSAGEBOARD_STATUS);
@@ -79,14 +79,14 @@ define ('MSG_TYPE_MODULE',              '1');
 define ('MSG_TYPE_PERSON',              '2');
 
 /* Main ticketsysteem files */
-define("FILE_TICKETSYSTEEM",             DIR_CLASS."ticketsysteem.php");
-define("FILE_LOCATION",                "location.php");
+define("FILE_TICKETSYSTEEM",             DIR_CLASS."TicketSysteem.php");
+define("FILE_LOCATION",                "Locatie.php");
 define("FILE_CLASS_TICKETSYSTEEM",       DIR_CLASS.FILE_TICKETSYSTEEM);
-define("FILE_DB_TICKETSYSTEEM",          DIR_CLASS."db_ticket.php");
+define("FILE_DB_TICKETSYSTEEM",          DIR_CLASS."DbTicket.php");
 define("FILE_TESTTICKETSYSTEEM",        DIR_INCLUDE. FILE_TICKETSYSTEEM);
 
 /* ticketsysteem status files */
-define("FILE_TICKETSYSTEEM_STATUS",      "ticketsysteem_status.php");
+define("FILE_TICKETSYSTEEM_STATUS",      "TicketsysteemStatus.php");
 define("FILE_DB_TICKETSYSTEEM_STATUS",   DIR_CLASS."db_".FILE_TICKETSYSTEEM_STATUS);
 define("FILE_CLASS_TICKETSYSTEEM_STATUS",DIR_CLASS.FILE_TICKETSYSTEEM_STATUS);
 
@@ -129,12 +129,12 @@ define ("TICKET_LOC_KANTOOR",            '10');
 define ("TICKET_LOC_OVERIG",                '11');
 
 /* Main marketing files */
-define("FILE_MARKETING",                                "marketing.php");
+define("FILE_MARKETING",                                "Marketing.php");
 define("FILE_CLASS_MARKETING",                          DIR_CLASS.FILE_MARKETING);
 define("FILE_DB_MARKETING",                             DIR_CLASS."db_".FILE_MARKETING);
 
 /* Main marketing email files */
-define("FILE_MARKETING_EMAIL",                          "marketing_email.php");
+define("FILE_MARKETING_EMAIL",                          "MarketingEmail.php");
 define("FILE_CLASS_MARKETING_EMAIL",                    DIR_CLASS.FILE_MARKETING_EMAIL);
 define("FILE_DB_MARKETING_EMAIL",                       DIR_CLASS."db_".FILE_MARKETING_EMAIL);
 
@@ -144,7 +144,7 @@ define("FILE_CLASS_MARKETING_TELEFOONTYPE",              DIR_CLASS.FILE_MARKETIN
 define("FILE_DB_MARKETING_TELEFOONTYPE",                 DIR_CLASS."db_".FILE_MARKETING_TELEFOONTYPE);
 
 /* Main marketing telefoonlijst files */
-define("FILE_MARKETING_TELEFOONLIJST",                    "marketing_telefoonlijst.php");
+define("FILE_MARKETING_TELEFOONLIJST",                    "MarketingTelefoonlijst.php");
 define("FILE_CLASS_MARKETING_TELEFOONLIJST",              DIR_CLASS.FILE_MARKETING_TELEFOONLIJST);
 define("FILE_DB_MARKETING_TELEFOONLIJST",                 DIR_CLASS."db_".FILE_MARKETING_TELEFOONLIJST);
 /* Marketing status definition */
@@ -159,12 +159,12 @@ define ('MARKETING_TYPE_MODULE',              '1');
 define ('MARKETING_TYPE_PERSON',              '2');
 
 /* Main rooster files */
-define("FILE_ROOSTER",                  "rooster.php");
+define("FILE_ROOSTER",                  "Rooster.php");
 define("FILE_CLASS_ROOSTER",            DIR_CLASS.FILE_ROOSTER);
 define("FILE_DB_ROOSTER",               DIR_CLASS."db_".FILE_ROOSTER);
 
 /* Main tijdblok files */
-define("FILE_TIJDBLOK",                 "tijdblok.php");
+define("FILE_TIJDBLOK",                 "Tijdblok.php");
 define("FILE_CLASS_ROOSTER_TIJDBLOK",   DIR_CLASS.FILE_TIJDBLOK);
 define("FILE_DB_ROOSTER_TIJDBLOK",      DIR_CLASS."db_rooster_".FILE_TIJDBLOK);
 
@@ -188,13 +188,13 @@ define("FILE_ITEM",                   	"item.php");
 define("FILE_DB_ITEM",        			DIR_CLASS."db_".FILE_ITEM);
 
 /* Main login files */
-define("FILE_SESSION",					"session.php");
+define("FILE_SESSION",					"Session.php");
 define("FILE_CLASS_SESSION",            DIR_CLASS.FILE_SESSION);
-define("FILE_LOGIN",					"loginsysteem.php");
+define("FILE_LOGIN",					"Loginsysteem.php");
 define("FILE_CLASS_LOGIN",             	DIR_CLASS.FILE_LOGIN);
 define("FILE_DB_LOGIN", 				DIR_CLASS."db_".FILE_LOGIN);
 
-define("FILE_GEBRUIKERRECHTEN",        "Gebruikerrecht.php");
+define("FILE_GEBRUIKERRECHTEN",        "GebruikerRecht.php");
 define("FILE_CLASS_GEBRUIKERRECHTEN",   DIR_CLASS.FILE_GEBRUIKERRECHTEN);
 
 /**

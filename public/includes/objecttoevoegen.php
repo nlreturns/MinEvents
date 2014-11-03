@@ -1,6 +1,6 @@
 <?php
-include_once 'classes/object.php';
-include_once 'classes/Afdeling.php';
+use minevents\app\classes\Object as Object;
+use minevents\app\classes\Afdeling as Afdeling;
 $afdeling = new Afdeling();
 $afdeling_array = $afdeling->getList();
 

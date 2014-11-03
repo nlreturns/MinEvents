@@ -1,5 +1,5 @@
 <?php
-
+namespace minevents\app\classes;
 define ('RECHT_GROUP_NAME_IS_ADMIN', 'Admin');
 /**
  * Description of RechtGroep
@@ -9,8 +9,6 @@ define ('RECHT_GROUP_NAME_IS_ADMIN', 'Admin');
  *                               and moved functionality accordingly.
  *                               Added replaceRechtBitfield() / heeftRecht().
  */
-require_once 'db_rechtgroep.php';
-require_once 'RechtBitfield.php';
 
 class RechtGroep {
 

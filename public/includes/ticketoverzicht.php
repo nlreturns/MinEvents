@@ -1,10 +1,11 @@
 <?php
-include_once FILE_TICKETSYSTEEM;
-include_once FILE_AFDELING;
-include_once FILE_GEBRUIKER;
-
+use minevents\app\classes\TicketSysteem as TicketSysteem;
+use minevents\app\classes\Afdeling as Afdeling;
+use minevents\app\classes\Gebruiker as Gebruiker;
+use minevents\app\classes\db\DbGebruiker as DbGebruiker;
+$ticket = new TicketSysteem();
 if (isset($_POST['Verzenden'])) {
-    $ticket = new TicketSysteem();
+
     /**
      * Nieuwe instantie van ticketsysteem maken.
      * Alles setten.
@@ -39,8 +40,6 @@ if (isset($_POST['Verzenden'])) {
  * check if ticket has to be deleted
  */
 if (isset($_GET['delete'])) {
-    // maak een instantie van het ticket object
-    $ticket = new TicketSysteem();
 
     // delete ticket
     $ticket->deleteTicket($_GET['delete']);
@@ -55,8 +54,6 @@ if (isset($_GET['delete'])) {
  * check if ticket has to be returned
  */
 if (isset($_GET['return'])) {
-    // maak een instantie van het ticket object
-    $ticket = new TicketSysteem();
 
     $current = $ticket->getTicketByID($_GET['return']);
 // Zend ticket terug naar in behandeling
@@ -84,8 +81,6 @@ if (isset($_GET['return'])) {
 
 /* update tickets tab 3 & 4 */
 if (isset($_POST['id']) && isset($_POST['status'])) {
-
-    $ticket = new TicketSysteem();
     $current = $ticket->getTicketByID($_POST['id']);
     $ticket->__set('ticket_id', $_POST['id']);
     $ticket->__set('pers_id', $current['pers_id']);
@@ -113,8 +108,6 @@ if (isset($_POST['id']) && isset($_POST['status'])) {
     echo 'Uw ticket is <strong>succesvol</strong> verwerkt!<button style="font-size:15px; color:blue;"  id="button">x</button>';
     echo "</div>";
 }
-
-$ticket = new Ticketsysteem;
 $afdeling = new Afdeling();
 $gebruiker = new Gebruiker(new DbGebruiker());
 

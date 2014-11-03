@@ -1,8 +1,5 @@
-
 <?php
-require_once 'error.php';
-require_once FILE_DB_ROOSTER;
-require_once FILE_CLASS_ROOSTER_TIJDBLOK;
+namespace minevents\app\classes;
 /**
  * Description of rooster
  *
@@ -109,7 +106,7 @@ class Rooster extends Error{
  * TO DO:
  * function object must be add tijdblok
  * 
- * variable begintijd and eindtijd should be a paramater and set by rooster.php
+ * variable begintijd and eindtijd should be a paramater and set by Rooster.php
  * 
  */    
     public function object(){

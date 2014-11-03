@@ -1,10 +1,11 @@
 <?php
-include_once 'classes/defs/constants.php';
-require FILE_DB_LOGIN;
-require FILE_SESSION;
+namespace minevents\app\classes;
 //require FILE_GEBRUIKER;
 
-class Login {
+use minevents\app\classes\db\DbGebruiker;
+use minevents\app\classes\db\DbLoginsysteem;
+
+class Loginsysteem {
 	
 	/*
 	* Naam gebruiker
@@ -37,12 +38,11 @@ class Login {
 	*/
 	public function __construct() {
 		// Nieuw object van Gebruiker
-		$this->user = new Gebruiker(new DbGebruiker());
-                $this->dbuser = new DbGebruiker();
+        $this->user = new Gebruiker(new DbGebruiker());
 		// Nieuw object van DbLoginSysteem
-		$this->db = new DbLoginSysteem;
+        $this->db = new DbLoginsysteem();
 		// Nieuw object van Session
-		$this->session = new Session;
+        $this->session = new Session();
 	}
 
 	/*
@@ -73,9 +73,10 @@ class Login {
 		// Kijk of je nog niet ingelogd bent
 		if(!$this->isloggedin()) {
 			// Zoniet, kijk of gegevens kloppen
+            echo ':D';
 			if($this->authenticate()) {
 				// Haal gebruikergegevens op en maak session aan.
-				$user = $this->dbuser->getGebruikerbyUsername($this->username);
+				$user = $this->user->getGebruikerbyUsername($this->username);
 				return $this->session->create($user);
 			} else {
 				// Als gegevens niet kloppen laat dan dit zien.
