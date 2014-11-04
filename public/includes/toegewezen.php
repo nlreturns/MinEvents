@@ -69,7 +69,6 @@ $countArray = count($ticket_array);
             
         if (isset($_POST['id']) && isset($_POST['status'])) {
             $current = $ticket->getTicketByID($_POST['id']);
-            $ticket->__set('ticket_id', $_POST['id']);
             $ticket->__set('pers_id', $current['pers_id']);
             $ticket->__set('titel', $current['ticket_titel']);
             $ticket->__set('afdeling', $current['afdeling_id']);

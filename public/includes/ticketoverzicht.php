@@ -1,8 +1,8 @@
 <?php
-use minevents\app\classes\TicketSysteem as TicketSysteem;
-use minevents\app\classes\Afdeling as Afdeling;
-use minevents\app\classes\Gebruiker as Gebruiker;
-use minevents\app\classes\db\DbGebruiker as DbGebruiker;
+use minevents\app\classes\TicketSysteem;
+use minevents\app\classes\Afdeling;
+use minevents\app\classes\Gebruiker;
+use minevents\app\classes\db\DbGebruiker;
 $ticket = new TicketSysteem();
 if (isset($_POST['Verzenden'])) {
 

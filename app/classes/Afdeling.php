@@ -78,7 +78,6 @@ class Afdeling {
      * @return type array
      */
     public function getAfdelingById($afdeling_id){
-        echo 'Afdeling';
         return $this->db->getItemById($afdeling_id);
         
     }

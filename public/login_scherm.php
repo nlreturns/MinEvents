@@ -12,7 +12,6 @@ if($login->isloggedin()){
     exit;
 } else {
 if(isset($_POST['inloggen'])) {
-    echo ':S';
     // username setten in Login class
 	$login->setUsername($_POST['gebruikersnaam']);
     // password setten in Login class

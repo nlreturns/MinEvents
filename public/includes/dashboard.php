@@ -17,7 +17,7 @@ use minevents\app\classes\MessageBoard;
             
             echo '<h1>Persoonlijke berichten: </h1>';
             foreach($dashboard->getUserMessageBoard($_SESSION['user_id']) as $personal_message){
-                echo "<a class='mblinks' href='/" . $personal_message['msg_link'] . "'>" . $personal_message['msg_beschrijving'] . "</a><br />";
+                echo "<a class='mblinks' href='" . $personal_message['msg_link'] . "'>" . $personal_message['msg_beschrijving'] . "</a><br />";
             }
             
             ?>

@@ -22,7 +22,6 @@ class DbObject extends Database {
     }
 
     public function createObject() {
-        var_dump($this->afdelingid);
         $sql = "INSERT INTO object (object_naam, afdeling_id) VALUES ('".$this->object_naam."', '".$this->afdelingid."')";
         $this->db->dbquery($sql);
     }

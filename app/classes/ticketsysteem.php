@@ -1,7 +1,6 @@
 <?php
 
 namespace minevents\app\classes;
-use minevents\app\classes\Afdeling as Afdeling;
 use minevents\app\classes\db\DbTicket as DbTicket;
 
 /**
@@ -71,8 +70,8 @@ class TicketSysteem {
         /**
          * @var db New instance of DbTicket
          */
-        $this->db = new DbTicket();
         $this->afdeling = new Afdeling();
+        $this->db = new DbTicket();
         $this->object = new Object();
         $this->message = new MessageBoard();
     }
@@ -153,7 +152,7 @@ class TicketSysteem {
 
         if($this->ticket_status_id == 1){
             //ticket toegewezen
-            $this->message->newMessage("Er is een ticket aan u toegewezen: " . $this->titel, WWW_ROOT . "index.php?page=tickets&subpage=toegewezentickets", $this->pers_id);
+            $this->message->newMessage("Er is een ticket aan u toegewezen: " . $this->titel, "?page=tickets&subpage=toegewezentickets", $this->pers_id);
         }elseif($this->ticket_status_id == 2){
             //naar verholpen
             $this->message->newMessage("Ticket heeft goedkeuring nodig: " . $this->titel, $this->ticket_id);
@@ -179,6 +178,7 @@ class TicketSysteem {
     }
 
     public function getAfdeling($afdelingid) {
+        $this->afdeling->getAfdelingById($afdelingid);
         if($result = $this->afdeling->getAfdelingById($afdelingid)) {
             echo 'jaa het werkt';
             return $result;

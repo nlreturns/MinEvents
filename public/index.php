@@ -13,7 +13,6 @@ if (!$login->isloggedin()) {
     header("Location: login_scherm.php");
     exit;
 } else {
-echo WWW_ROOT;
 include_once 'includes/header.php';
 
 include_once 'includes/content.php';
