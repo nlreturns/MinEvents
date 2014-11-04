@@ -3,8 +3,8 @@ namespace minevents\app\classes;
 /**
  * Only a limit for the number of array elements
  */
-define ('MAX_BIT_POSITION_IN_BITFIELD', 2048);
-define ('NUMBER_OF_BITS_IN_BITFIELD_PART', 31);
+//define ('MAX_BIT_POSITION_IN_BITFIELD', 2048);
+//define ('NUMBER_OF_BITS_IN_BITFIELD_PART', 31);
 
 
 
@@ -30,6 +30,8 @@ class RechtBitfield {
      * @var array of bitfield's
      */
     private $bitfield_array = array();
+    const MAX_BIT_POSITION_IN_BITFIELD = 2048;
+    const NUMBER_OF_BITS_IN_BITFIELD_PART = 31;
 
     public function __construct() {
         //Initialize the firsth int in the bitfield_array
@@ -333,8 +335,7 @@ class RechtBitfield {
      *
      */
     private function checkRecht($recht_positie) {
-
-        if (empty($recht_positie) || ($recht_positie > MAX_BIT_POSITION_IN_BITFIELD)) {
+        if (empty($recht_positie) || ($recht_positie > self::MAX_BIT_POSITION_IN_BITFIELD)) {
             throw new Exception('Invalid Recht Positie.');
         }
     }

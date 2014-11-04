@@ -15,14 +15,6 @@ class Recht {
     private $beschrijving = '';
     private $recht_positie;
 
-	public function __construct() {
-
-	}
-
-    public function Recht() {
-
-    }
-
     public function getRechtBeschrijving() {
         return $this->beschrijving;
     }

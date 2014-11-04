@@ -20,12 +20,6 @@ class GebruikerRecht {
      */
     private $rechtgroep;
     /**
-     * @var
-     */
-    private $gebruiker;
-
-    private $rechtgroepnaam;
-    /**
      *
      */
     public function __construct() {
