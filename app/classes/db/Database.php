@@ -12,10 +12,12 @@
  * 0.3  - 30.10.2014  Jan-Willem Dooms <janwillem.dooms@gmail.com>  MySQL to MySQLi conversion
  *
  */
-require_once DIR_DEFINES . 'db_constants.php';
-require_once WWW_ROOT . 'lang/nl/planningsysteem.php';
-require_once 'error.php';
-include_once 'lang/nl/general.php';
+//require_once DIR_DEFINES . 'db_constants.php';
+//require_once WWW_ROOT . 'lang/nl/planningsysteem.php';
+//require_once 'Error.php';
+//include_once 'lang/nl/general.php';
+namespace minevents\app\classes\db;
+use minevents\app\classes\Error;
 
 class Database extends Error {
 
@@ -24,7 +26,7 @@ class Database extends Error {
 
     public function __construct() {
         /* Make connection to database */
-        $this->connection = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME) or die('There was a problem connecting to the database');
+        $this->connection = new \mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME) or die('There was a problem connecting to the database');
     }
 
     /**
