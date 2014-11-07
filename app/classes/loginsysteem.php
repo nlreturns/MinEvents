@@ -73,8 +73,8 @@ class Loginsysteem {
 		// Kijk of je nog niet ingelogd bent
 		if(!$this->isloggedin()) {
 			// Zoniet, kijk of gegevens kloppen
-            echo ':D';
 			if($this->authenticate()) {
+                            
 				// Haal gebruikergegevens op en maak session aan.
 				$user = $this->user->getGebruikerbyUsername($this->username);
 				return $this->session->create($user);

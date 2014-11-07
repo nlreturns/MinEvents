@@ -19,12 +19,15 @@
 namespace minevents\app\classes\db;
 use minevents\app\classes\Error;
 
-class Database extends Error {
+class Database {
 
     protected $connection;         //The MySQL database connection
     private $query_result;
+    private $error;
 
     public function __construct() {
+        /* Make an instance of the error class */
+        $this->error = new Error();
         /* Make connection to database */
         $this->connection = new \mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME) or die('There was a problem connecting to the database');
     }
@@ -34,8 +37,8 @@ class Database extends Error {
      * @return string  '' | mysqlerrno()-mysql error txt [query]
      */
     protected function getDbError() {
-        if ($this->connection->errno()) {
-            return $this->connection->errno() . '-' . $this->connection->error() . " [$query]";
+        if ($this->connection->errno) {
+            return $this->connection->errno . '-' . $this->connection->error . " [$query]";
         }
         return '';
     }
@@ -58,7 +61,7 @@ class Database extends Error {
 
                 default:
                     $error = "MySQL error " . $this->connection->errno . ": " .
-                            $this->connection->error() . "\n<br><br>\n$query\n<br>";
+                            $this->connection->error . "\n<br><br>\n$query\n<br>";
                     $this->setError($error);
                     break;
             }
@@ -76,8 +79,9 @@ class Database extends Error {
      * @return bool TRUE if Ok | FALSE check error array
      */
     protected function dbquery($query) {
-        var_dump($this->connection);
+        
         $this->query_result = $this->connection->query($query);
+        
         return $this->query_result;
     }
 
@@ -88,7 +92,7 @@ class Database extends Error {
      * @return array the modified input array
      */
     protected function dbOutArray($data_array) {
-
+        //var_dump($data_array);
         foreach ($data_array as $field => $value) {
             if (is_numeric($value)) {
                 continue;
@@ -108,9 +112,6 @@ class Database extends Error {
      * @return FALSE No data was found.
      */
     protected function dbFetchArray($query) {
-        if (!$this->isMySqliResource($query)) {
-            return FALSE;
-        }
         
         $result = $this->connection->query($query);
         
@@ -121,7 +122,7 @@ class Database extends Error {
             return FALSE;
         }
 
-        if (!$this->connection->errno()) {
+        if (!$this->connection->errno) {
             $data_array = $this->dbOutArray($data_array);
         }
         return $data_array;
@@ -144,9 +145,9 @@ class Database extends Error {
      * @return FALSE No succesfull query was found.
      */
     protected function dbFetchAll() {
-        if (!is_resource($this->query_result)) {
-            return FALSE;
-        }
+        
+        //@@TODO RESOURCE CHECK IS_A ?
+        
         $return_array = array();
 
         while ($row = $this->query_result->fetch_array(MYSQLI_ASSOC)) {
@@ -233,10 +234,12 @@ class Database extends Error {
      * @param resource $res The resource that should be checked
      * @return bool TRUE if $res is mysql resource | FALSE any other case
      * (check error array)
+     * 
+     * @@TODO NEEDS REWORKING
      */
     private function isMySqliResource($res) {
         $res_type = is_resource($res) ? get_resource_type($res) : gettype($res);
-
+        
         if (!is_a($res_type, 'Mysqli')) {
             echo 'Invalid resource type: ' . $res_type;
             return FALSE;

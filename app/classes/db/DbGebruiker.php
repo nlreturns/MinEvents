@@ -56,9 +56,9 @@ class DbGebruiker extends Database {
      * @param type $id
      * @return boolean
      */
-    public function construct() {
-        parent::__construct();
-        //$this->db = new Database;
+    private $db;
+    public function __construct() {
+        $this->db = new Database();
     }
 
     // Getters
@@ -129,7 +129,7 @@ class DbGebruiker extends Database {
                 '" . $gebruiker_wachtwoord . "'
                 );";
         
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         } else {
             $this->gebruiker_naam = $gebruiker_naam;
@@ -147,7 +147,7 @@ class DbGebruiker extends Database {
 
         $query = "DELETE FROM gebruiker WHERE gebruiker . gebruiker_id = '" . mysql_real_escape_string($gebruiker_id) . "'  LIMIT 1 ";
 
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         }
     }
@@ -158,8 +158,8 @@ class DbGebruiker extends Database {
      */
     public function getGebruikerbyUsername($username) {
         $query = "SELECT * FROM gebruiker WHERE gebruiker_naam = '$username'";
-        $this->dbquery($query);
-        $user = $this->dbFetchAll($query);
+        $this->db->dbquery($query);
+        $user = $this->db->dbFetchAll($query);
         if ($user == NULL) {
             return FALSE;
         } else {
@@ -178,9 +178,9 @@ class DbGebruiker extends Database {
             `gebruiker_id` = " . mysql_real_escape_string($gebruiker_id);
         // haalt de array op aan de hand van database's fetchDbArray function.
         // als het null is,
-        $result = $this->dbquery($query);
+        //$result = $this->db->dbquery($query);
         
-        $data = $this->dbFetchArray($result);
+        $data = $this->db->dbFetchArray($query);
         
         if ( $data == NULL) {
             return FALSE;
@@ -201,10 +201,10 @@ class DbGebruiker extends Database {
         $query = "SELECT * FROM  `gebruiker` ORDER BY  `gebruiker`.`gebruiker_naam` ASC";
         // haalt de array op aan de hand van database's fetchDbArray function.
         // als het null is,
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         }
-        if(!($result = $this->dbFetchAll())){
+        if(!($result = $this->db->dbFetchAll())){
             // set error.
             echo TXT_NO_DATA;
             return FALSE;
@@ -232,7 +232,7 @@ class DbGebruiker extends Database {
                         `gebruiker_wachtwoord` = '" . mysql_real_escape_string($gebruiker_wachtwoord) . "' WHERE   
                         `gebruiker_id` =" . mysql_real_escape_string($gebruiker_id);
         
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         } else {
             $this->gebruiker_naam = $gebruiker_naam;

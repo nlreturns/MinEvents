@@ -41,12 +41,15 @@ class MessageBoard extends Error {
      */
     public function newMessage($msg_desc,$link,$to = null){
         $db_msgbrd = new DbMessageBoard();
-
+        
         if (!$db_msgbrd->save( $msg_desc, $link, $to )){
+            
             $this->setErrorArray($db_msgbrd->getErrorArray());
             return FALSE;
         } 
+        
         $this->id = $db_msgbrd->getMessageId();
+        
         return TRUE;
     }
 

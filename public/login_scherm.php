@@ -4,6 +4,7 @@ include_once '../app/config/constants.php';
 include_once '../app/config/db_constants.php';
 $autoloader = new \minevents\app\core\SplClassLoader('minevents\app', '../../');
 $autoloader->register();
+
 // Nieuw object van Login class
 $login = new \minevents\app\classes\Loginsysteem();
 // Controleer of gebruiker al ingelogd is, zoja ga dan naar de index pagina

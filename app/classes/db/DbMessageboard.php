@@ -28,9 +28,14 @@ class DbMessageBoard extends Database {
     private $createtime;
     private $orig_create_id;
     private $orig_create_type_id;
+    private $db;
 
+    public function __construct() {
+        $this->db = new Database();
+    }
+    
     public function DbMessageBoard($id = '') {
-        parent::__construct();
+        
 
         if (empty($id)) {
             /* Check whether the database already is created */
@@ -71,22 +76,23 @@ class DbMessageBoard extends Database {
                     "`(`" . FIELD_MSGBRD_DESC . "`,`" .
                     FIELD_MSGBRD_TO . "`,`" .
                     FIELD_MSGBRD_LINK . "`)
-                    VALUES ('" . $this->dbInString($desc) . "','" .
+                    VALUES ('" . $this->db->dbInString($desc) . "','" .
                     $to . "','" .
-                    $this->dbInString($link) . "')";
-
-            $this->dbquery($query);
-
-            if ($this->checkDbErrors($query)) {
+                    $this->db->dbInString($link) . "')";
+            
+            $this->db->dbquery($query);
+            
+            if ($this->db->checkDbErrors($query)) {
                 return FALSE;
             }
-
+            
             /* Update class attributes */
-            $this->id = mysql_insert_id($this->connection);
+            $this->id = mysqli_insert_id($this->db->connection);
             $this->desc = $desc;
             $this->link = $link;
             $this->to = $to;
             $this->createtime = $this->getCreateTime();
+            
         } else {
             return FALSE;
         }
@@ -106,14 +112,14 @@ class DbMessageBoard extends Database {
                 " WHERE `" . FIELD_MSGBRD_TO . "` = '" . $id . "' LIMIT " . $start .",". $limit
                 . ") sub ORDER BY " . FIELD_MSGBRD_TO . " ASC";
         
-        $this->dbquery($query);
+        $this->db->dbquery($query);
 
-        if ($this->checkDbErrors($query)) {
+        if ($this->db->checkDbErrors($query)) {
             return FALSE;
         }
 
         /** Fetch all entries * */
-        $msg_array = $this->dbFetchAll();
+        $msg_array = $this->db->dbFetchAll();
 
 
         return $msg_array;
@@ -298,11 +304,12 @@ class DbMessageBoard extends Database {
 
         $query = "SELECT `" . FIELD_MSGBRD_CREATE_TIME . "` FROM `" . TBL_MESSAGEBOARD .
                 "` WHERE `" . FIELD_MSGBRD_ID . "`='" . $this->id . "'";
-        $result = $this->dbquery($query);
-
-        if (!$this->checkDbErrors($query)) {
-
-            $row_array = $this->dbFetchArray($result);
+        //$result = $this->db->dbquery($query);
+        
+        if (!$this->db->checkDbErrors($query)) {
+            
+            $row_array = $this->db->dbFetchArray($query);
+            
             return $row_array[FIELD_MSGBRD_CREATE_TIME];
         }
         return '';

@@ -41,6 +41,7 @@ class DbItem extends Database{
      * Description field of the database table.
      */
     public $tbl_desc;
+    public $db;
             
     /**
      * Calls Database's constructor. 
@@ -53,6 +54,7 @@ class DbItem extends Database{
         $this->tbl_id = $tbl_id;
         $this->tbl_title = $tbl_title;
         $this->tbl_desc = $tbl_desc;
+        $this->db = new Database();
         // check if the table exists.
         /*if(!$this->checkIfTableExist()){
             // if it doesn't: create the table using the previously set class vars
@@ -77,7 +79,7 @@ class DbItem extends Database{
                           '" . mysql_real_escape_string($item_desc) . "'
                   )";
         // if the query returns false
-        if (!$this->dbquery($query)){
+        if (!$this->db->dbquery($query)){
             // set the error.
             echo mysql_error();
             return FALSE;
@@ -99,7 +101,7 @@ class DbItem extends Database{
         // query shows the tables with the inserted title
         $query = "SHOW TABLES LIKE " . $this->table;
         // if the query returns false
-        if (!$this->dbquery($query)){
+        if (!$this->db->dbquery($query)){
             // set the error.
             //echo mysql_error();
             return FALSE;
@@ -124,7 +126,7 @@ class DbItem extends Database{
                 "`".$this->tbl_desc."` LONGTEXT NOT NULL".
                 ") ENGINE = MYISAM ";
         // if the query returns false
-        if (!$this->dbquery($query)){
+        if (!$this->db->dbquery($query)){
             // set the error.
             echo mysql_error();
             return FALSE;
@@ -149,7 +151,7 @@ class DbItem extends Database{
                 `" . $this->tbl_desc . "` = '" . mysql_real_escape_string($item_desc) . "' WHERE 
                 `" . $this->table . "`.`" . $this->tbl_id . "` =" . mysql_real_escape_string($item_id) . ";";
         // if the query returns false
-        if (!$this->dbquery($query)){
+        if (!$this->db->dbquery($query)){
             // set the error.
             echo mysql_error();
             return FALSE;
@@ -172,10 +174,10 @@ class DbItem extends Database{
             `" . $this->tbl_id . "` =". mysql_real_escape_string($item_id) ."";
         // fetches the array using Database's fetchDbArray function.
         // If it's null,
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         }
-        if(!($result = $this->dbFetchAll())){
+        if(!($result = $this->db->dbFetchAll())){
             // set error.
             echo TXT_NO_DATA;
             return FALSE;
@@ -192,10 +194,10 @@ class DbItem extends Database{
         $query = "SELECT * FROM  `". $this->table . "` ORDER BY  `". $this->table . "`.`" . $this->tbl_title . "` ASC";
         // fetches the array using Database's fetchDbArray function.
         // If it's null,
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         }
-        if(!($result = $this->dbFetchAll())){
+        if(!($result = $this->db->dbFetchAll())){
             // set error.
             echo TXT_NO_DATA;
             return FALSE;
@@ -207,7 +209,7 @@ class DbItem extends Database{
 
         $query = "DELETE FROM afdeling WHERE afdeling . item_title , item_desc = '" . mysql_real_escape_string($item_title, $item_desc, $item_id) . "'  LIMIT 1 ";
 
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         }
     }

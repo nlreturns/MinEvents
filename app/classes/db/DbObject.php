@@ -38,10 +38,10 @@ class DbObject extends Database {
             `object_id` =". mysql_real_escape_string($object_id) ."";
         // fetches the array using Database's fetchDbArray function.
         // If it's null,
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         }
-        if(!($result = $this->dbFetchAll())){
+        if(!($result = $this->db->dbFetchAll())){
             // set error.
             echo TXT_NO_DATA;
             return FALSE;
@@ -54,10 +54,10 @@ class DbObject extends Database {
         $query = "SELECT * FROM  `object` ORDER BY  `object`.`object_id` ASC";
         // fetches the array using Database's fetchDbArray function.
         // If it's null,
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         }
-        if(!($result = $this->dbFetchAll())){
+        if(!($result = $this->db->dbFetchAll())){
             // set error.
             echo TXT_NO_DATA;
             return FALSE;

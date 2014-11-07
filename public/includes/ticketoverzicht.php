@@ -5,7 +5,7 @@ use minevents\app\classes\Gebruiker;
 use minevents\app\classes\db\DbGebruiker;
 $ticket = new TicketSysteem();
 if (isset($_POST['Verzenden'])) {
-
+    
     /**
      * Nieuwe instantie van ticketsysteem maken.
      * Alles setten.
@@ -164,7 +164,6 @@ $sort_arrow = ($direction == 'ASC' ? '<img height="15px" src="img/up.png" />' : 
 
 // used to build urls to reverse the current sort direction
 $reverse_direction = ($direction == 'DESC' ? 'ASC' : 'DESC');
-
 
 $afdeling_array = $afdeling->getList();
 $gebruiker_array = $gebruiker->getGebruikerList();

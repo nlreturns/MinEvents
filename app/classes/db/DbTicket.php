@@ -102,7 +102,7 @@ class DbTicket extends Database {
                     "` WHERE `" . TBL_TICKETSYSTEEM . "`.`" . FIELD_TICKET_ID . "` = '" . $id . "'";
             
             // execute query
-            $result = $this->dbquery($query);
+            $result = $this->db->dbquery($query);
 
             return TRUE;
         }
@@ -114,13 +114,14 @@ class DbTicket extends Database {
      * @return bool TRUE | FALSE (Lookup the error array)
      */
     public function updateTicket($titel, $pers_id, $afdeling, $object, $beschrijving, $progress, $prioid, $ticket_status_id, $ticket_end_tijd) {
+        
         // check if not empty
         if (!empty($this->ticket_id)) {
             // check fields
             if ($this->checkStatusId($this->status_id, FIELD_TICKET_STATUS_ID) &&
                     $this->checkPrioId($this->prio_id, FIELD_TICKET_PRIO_ID)
             ) {
-
+                
                 // create query
                 $query = "UPDATE `" . DB_NAME . "`.`" . TBL_TICKETSYSTEEM .
                         "` SET `" . FIELD_TICKET_STATUS_ID . "` = '" . $ticket_status_id . "',`" .
@@ -136,7 +137,7 @@ class DbTicket extends Database {
                         WHERE `" . TBL_TICKETSYSTEEM . "`.`" . FIELD_TICKET_ID . "` = '" . $this->ticket_id . "'";
 
                 // execute query
-                $result = $this->dbquery($query);
+                $result = $this->db->dbquery($query);
 
 
                 return TRUE;
@@ -196,8 +197,8 @@ class DbTicket extends Database {
             ORDER BY Customers.CustomerName;
          */
         
-        $query = $this->dbquery($query);
-        $ticket_array = $this->dbFetchArray($query);
+        $query = $this->db->dbquery($query);
+        $ticket_array = $this->db->dbFetchArray($query);
         if ($ticket_array !== FALSE) {
 
             /* Save class data */
@@ -227,12 +228,12 @@ class DbTicket extends Database {
      *              FALSE if error found (Check error array)
      */
     public function getDbTicketByID($ticket_id = '') {
-
+        
         if (empty($ticket_id) && !empty($this->ticket_id)) {
             $ticket_id = $this->ticket_id;
         } else if (!empty($ticket_id) && !empty($this->ticket_id)) {
             /* Reset this class firsth */
-            $this->reset();
+            $this->db->reset();
         } else if (empty($ticket_id) && empty($this->ticket_id)) {
             /* Both empty -> Error */
             $this->setError(TXT_ERROR . TXT_NO_VALID_TICKET_ID);
@@ -244,12 +245,14 @@ class DbTicket extends Database {
         if (!$this->checkTicketId($ticket_id, FIELD_TICKET_ID)) {
             return FALSE;
         }
-
+        
         $query = "SELECT * FROM `" . TBL_TICKETSYSTEEM . "`" .
                 " WHERE `" . FIELD_TICKET_ID . "` = '" . $ticket_id . "'";
-
-        $query = $this->dbquery($query);
-        $ticket_array = $this->dbFetchArray($query);
+        
+        //$query = $this->db->dbquery($query);
+        
+        $ticket_array = $this->db->dbFetchArray($query);
+        
         if ($ticket_array !== FALSE) {
 
             /* Save class data */
@@ -308,10 +311,10 @@ class DbTicket extends Database {
         
         // fetches the array using Database's fetchDbArray function.
         // If it's null,
-        if (!$this->dbquery($query)) {
+        if (!$this->db->dbquery($query)) {
             return false;
         }
-        if (!($result = $this->dbFetchAll())) {
+        if (!($result = $this->db->dbFetchAll())) {
             // set error.
             echo TXT_NO_DATA;
             return FALSE;
