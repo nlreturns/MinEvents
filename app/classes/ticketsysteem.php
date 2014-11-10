@@ -97,7 +97,9 @@ class TicketSysteem {
          */
         $this->db->createTicket($this->creator_id, $this->titel, $this->beschrijving, $this->progress, $this->createdate);
         
-        $ticket_id = mysql_insert_id();
+        $link = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+
+        $ticket_id = mysqli_insert_id($link);
         
         $this->message->newMessage("Nieuw ticket toegevoegt: " . $this->titel, $ticket_id);
     }
