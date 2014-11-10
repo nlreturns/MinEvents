@@ -54,20 +54,21 @@ class Database {
         if ($this->connection->errno) {
             switch ($this->connection->errno) {
                 case 1062:
-                    $this->setError(TXT_ERROR_DUPLICATE_ENTRY);
+                    $this->error->setError(TXT_ERROR_DUPLICATE_ENTRY);
                     break;
                 case 0:
-                    $this->setError("ERROR UNKNOWN");
+                    $this->error->setError("ERROR UNKNOWN");
 
                 default:
                     $error = "MySQL error " . $this->connection->errno . ": " .
                             $this->connection->error . "\n<br><br>\n$query\n<br>";
-                    $this->setError($error);
+                    $this->error->setError($error);
                     break;
             }
 
             return TRUE;
         }
+        $this->error->setError("No errors.");
         return FALSE;
     }
 
@@ -119,6 +120,7 @@ class Database {
         $data_array = $result->fetch_array(MYSQLI_ASSOC);
 
         if ($data_array === FALSE) {
+            $this->error->setError("No data");
             return FALSE;
         }
 
@@ -132,6 +134,7 @@ class Database {
         if ($this->isMySqliResource($this->query_result)) {
             return $this->query_result->num_rows;
         } else {
+            $this->error->setError("No rows");
             return FALSE;
         }
     }
@@ -166,6 +169,7 @@ class Database {
         $result = $this->dbquery($query);
 
         if ($result = ($this->connection->errno == 1146)) {
+            $this->error->setError("Table doesn't exist");
             return FALSE;
         }
         return TRUE;
@@ -223,7 +227,7 @@ class Database {
      */
     protected function checkId($id, $field) {
         if (!is_numeric($id)) {
-            $this->setError(TXT_ERROR_WRONG_VAR_TYPE . " [$id] " . $field);
+            $this->error->setError(TXT_ERROR_WRONG_VAR_TYPE . " [$id] " . $field);
             return FALSE;
         }
         return TRUE;
@@ -241,7 +245,7 @@ class Database {
         $res_type = is_resource($res) ? get_resource_type($res) : gettype($res);
         
         if (!is_a($res_type, 'Mysqli')) {
-            echo 'Invalid resource type: ' . $res_type;
+            $this->error->setError('Invalid resource type: ' . $res_type);
             return FALSE;
         }
         return TRUE;
