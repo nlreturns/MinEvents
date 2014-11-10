@@ -17,11 +17,11 @@ class Error {
 
 //     }
 
-//     public function setError( $error_txt ){
-//         if (!empty($error_txt)){
-//             $this->error_array[] = $error_txt;
-//         }
-//     }
+     public function setError( $error_txt ){
+         if (!empty($error_txt)){
+             $this->error_array[] = $error_txt;
+         }
+     }
 
 //     /**
 //      *
