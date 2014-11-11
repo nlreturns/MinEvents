@@ -12,10 +12,6 @@
  * 0.3  - 30.10.2014  Jan-Willem Dooms <janwillem.dooms@gmail.com>  MySQL to MySQLi conversion
  *
  */
-//require_once DIR_DEFINES . 'db_constants.php';
-//require_once WWW_ROOT . 'lang/nl/planningsysteem.php';
-//require_once 'Error.php';
-//include_once 'lang/nl/general.php';
 namespace minevents\app\classes\db;
 use minevents\app\classes\Error;
 

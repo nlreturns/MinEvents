@@ -50,7 +50,6 @@ class Session {
      */
 
     public function create($user) {
-        var_dump($user);
         //Set de user_id
         $this->user_id = $user[0]['gebruiker_id'];
         //Set de username

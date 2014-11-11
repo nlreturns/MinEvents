@@ -75,8 +75,8 @@ class DbItem extends Database{
         $query = "INSERT INTO  `" . DB_NAME . "`.`". $this->table . "` (
                     `" . $this->tbl_title . "`,
                     `" . $this->tbl_desc . "`)
-                  VALUES ('" . mysql_real_escape_string($item_title) . "',
-                          '" . mysql_real_escape_string($item_desc) . "'
+                  VALUES ('" . $item_title . "',
+                          '" . $item_desc . "'
                   )";
         // if the query returns false
         if (!$this->db->dbquery($query)){

@@ -1,18 +1,18 @@
 <?php
-
-/**
- * Dit is de klasse persoon.
- * Klassen om gebruikers te registreren, aan te passen,
- * verwijderen of op te  halen ter controle.
- * 
- * @version 0.1
- * @author Bjorn Faber
- * 
- */
 namespace minevents\app\classes;
 
 use minevents\app\classes\db\DbGebruiker;
 
+/**
+ * Dit is de klasse Gebruiker.
+ * Klassen om gebruikers te registreren, aan te passen,
+ * verwijderen of op te  halen ter controle.
+ *
+ * @version 0.2
+ * @author Bjorn Faber
+ * @author Donny van Walsem <donnehvw@gmail.com>
+ *
+ */
 class Gebruiker {
 
     /**
@@ -66,14 +66,15 @@ class Gebruiker {
         $this->rechten = new RechtBitfield();
     }
 
-    // Getters
-
     /**
      * Get gebruiker ID.
      * @return type gebruiker_id
      */
     public function getGebruikerId() {
-        return $this->gebruiker_id;
+        if(!empty($this->gebruiker_id)) {
+            return $this->gebruiker_id;
+        }
+        return false;
     }
 
     /**
@@ -81,7 +82,10 @@ class Gebruiker {
      * @return type gebruiker_naam
      */
     public function getGebruikerNaam() {
-        return $this->gebruiker_naam;
+        if(!empty($this->gebruiker_naam)) {
+            return $this->gebruiker_naam;
+        }
+        return false;
     }
 
     /**
@@ -90,8 +94,12 @@ class Gebruiker {
      * @return type
      */
     public function getGebruikerById($gebruiker_id) {
-        
-        return $this->dbGebruiker->getGebruikerByIdDb($gebruiker_id);
+        if(!empty($gebruiker_id)) {
+            if($result = $this->dbGebruiker->getGebruikerByIdDb($gebruiker_id)) {
+                return $result;
+            }
+        }
+        return false;
     }
 
     /**

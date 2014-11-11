@@ -1,6 +1,5 @@
 <?php
 namespace minevents\app\classes;
-//require FILE_GEBRUIKER;
 
 use minevents\app\classes\db\DbGebruiker;
 use minevents\app\classes\db\DbLoginsysteem;

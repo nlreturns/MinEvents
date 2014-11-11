@@ -1,5 +1,20 @@
 <?php
 use minevents\app\classes\Afdeling as Afdeling;
+
+if(isset($_POST['Verzenden'])) {
+    $afdeling = new Afdeling();
+    $titel = filter_input(
+        INPUT_POST, 'titel', FILTER_SANITIZE_SPECIAL_CHARS
+    );
+    $beschrijving = filter_input(
+        INPUT_POST, 'beschrijving', FILTER_SANITIZE_SPECIAL_CHARS
+    );
+    $afdeling->add($titel, $beschrijving);
+
+    echo "<div id='result'>";
+    echo 'Uw Afdeling is <strong>succesvol</strong> aangemaakt!';
+    echo "</div>";
+}
 ?>
 <form method="post" class="formulier">
     <h2>Ticketformulier</h2>
@@ -11,7 +26,7 @@ use minevents\app\classes\Afdeling as Afdeling;
         </tr>
         <tr>
             <td>
-                <input type="text" name="afdeling" />
+                <input type="text" name="titel" />
             </td>
         </tr>
         <tr>
@@ -31,18 +46,3 @@ use minevents\app\classes\Afdeling as Afdeling;
         </tr>
     </table>
 </form>
-<?php
-if(isset($_POST['Verzenden'])) {
-    /**
-     * Nieuwe instantie van ticketsysteem maken.
-     * Alles setten.
-     */
-    $afdeling = new Afdeling();
-     // Ticket opslaan in database
-    $afdeling->add($_POST['afdeling'], $_POST['beschrijving']);
-   
-    echo "<div id='result'>";
-    echo 'Uw Afdeling is <strong>succesvol</strong> aangemaakt!';
-    echo "</div>";
-}
-?>

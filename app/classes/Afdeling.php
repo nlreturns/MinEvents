@@ -50,13 +50,13 @@ class Afdeling {
 
     /**
      * Adds afdeling using the inserted parameters and DbItem's functions.
-     * @param type $afdeling_title
-     * @param type $afdeling_desc
+     * @param string $afdeling_title
+     * @param string $afdeling_desc
      * @return boolean
      */
     public function add($afdeling_title, $afdeling_desc) {
         // if title and desc are empty:
-        if(empty($afdeling_title) and empty($afdeling_desc)) {
+        if(empty($afdeling_title) && empty($afdeling_desc)) {
             // return error
             echo ERROR_MISSING_BOTH;
             return FALSE;
@@ -68,7 +68,7 @@ class Afdeling {
             // if description is empty
         } elseif(empty($afdeling_desc)) {
             // return error
-            ERROR_MISSING_DESC;
+            echo ERROR_MISSING_DESC;
             return FALSE;
             // if both vars are filled
         } elseif(!empty($afdeling_title) or !empty($afdeling_desc)) {
@@ -91,11 +91,13 @@ class Afdeling {
 
     /**
      * Gets afdeling by id from database using DbItem's getItemById.
-     * @param type $afdeling_id
+     * @param int $afdeling_id
      * @return type array
      */
     public function getAfdelingById($afdeling_id) {
-        return $this->db->getItemById($afdeling_id);
+        if($result = $this->db->getItemById($afdeling_id)) {
+            return $result;
+        }
 
     }
 
@@ -126,12 +128,6 @@ class Afdeling {
     public function setBeschrijving($desc) {
         if(!empty($desc)) {
             $this->afdeling_desc = $desc;
-        }
-    }
-
-    public function create() {
-        if(!empty($this->afdeling_id) && !empty($this->afdeling_desc)) {
-            $this->db->createAfdeling($this->afdeling_title, $this->afdeling_desc);
         }
     }
 }
