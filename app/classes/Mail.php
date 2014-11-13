@@ -1,81 +1,92 @@
 <?php
+
 namespace minevents\app\classes;
+
+
+
+
 class Mail {
-    
-    private $to;
-    private $from;
-    private $subject;
-    private $message = 'Dit is een automatisch verzonden bericht. <br />';
-    private $headers;
-    private $titel;
-    private $afdeling;
-    private $object;
-    
-    // verstuur de mail
-    public function send() {
-        $this->addHeader( 'From: no-reply@minevents.nl "\r\n" ');
-        $this->addHeader('X-Mailer: PHP/'.phpversion());
-        mail($this->to, $this->subject, $this->message, $this->headers);
+
+    private $phpmailer;
+    private $configArray;
+    public $message;
+
+    public function __construct(\PHPMailer $PHPMailer, Configuration $config) {
+        $this->phpmailer = $PHPMailer;
+        $this->configArray = $config->getIniArray('Mail');
+        $this->setUsername();
+        $this->setPassword();
     }
-    
-    // set de ontvanger
-    public function setTo($to) {
-        $this->to = $to;
+
+    private function setSMTP() {
+        $this->phpmailer->isSMTP();
+        $this->phpmailer->Host = $this->configArray['smtp_host'];
+        $this->phpmailer->Port = $this->configArray['smtp_port'];
+        $this->phpmailer->SMTPDebug = $this->configArray['smtp_debug'];
+        $this->phpmailer->Debugoutput = $this->configArray['debug_output'];
+        $this->phpmailer->SMTPSecure = $this->configArray['smtp_secure'];
+        $this->phpmailer->SMTPAuth = $this->configArray['smtp_auth'];
     }
-    
-    // set het onderwerp van de mail
-    public function setSubject($subject) {
-        $this->subject = $subject;
-    }
-    
-    // set het bericht
-    public function setMessage($message) {
-        if(!$message) {
-            $this->message = 
-                'Ticket <br />
-                Afdeling:'.$this->afdeling.'<br />
-                Object:'.$this->object. '<br />
-                Titel:'.$this->titel.'<br />
-                Beschrijving:'.$this->message.'<br /> 
-                Dit is een automatisch verzonden bericht.';
+
+    public function sendMail() {
+        $this->setSMTP(new Configuration(CONFIG_FILE));
+        $this->phpmailer->msgHTML($this->message);
+        if (!$this->phpmailer->send()) {
+            echo "Mailer Error: " . $this->phpmailer->ErrorInfo;
+        } else {
+            echo "Message sent!";
         }
-        $this->message .= $message;
     }
-    
-    // set afdeling
-    public function setAfdeling($afdeling) {
-        $this->afdeling = $afdeling;
+
+    public function setFrom($from) {
+        if(!empty($from)) {
+            $this->phpmailer->From = $from;
+        }
     }
-    
-    // set object
-    public function setObject($object) {
-        $this->object = $object;
+
+    public function setReplyTo($replyMail, $replyName) {
+        if(!empty($replyMail) && !empty($replyName)) {
+            $this->phpmailer->addReplyTo($replyMail, $replyName);
+        }
     }
-    
-    //get bericht
-    public function getMessage() {
-        return $this->message;
+
+    public function setAddress($mail, $name) {
+        if(!empty($mail) && !empty($name)) {
+            $this->phpmailer->addAddress($mail, $name);
+        }
     }
-    
-    //get ontvanger
-    public function getTo() {
-        return $this->to;
+
+    public function setSubject($subject) {
+        if(!empty($subject)) {
+            $this->phpmailer->Subject = $subject;
+        } else {
+            $this->phpmailer->Subject = '';
+        }
     }
-    
-    
-    //get afdeling
-    public function getAfdeling() {
-        return $this->afdeling;
+
+    public function setMessage($template = null, $message = null) {
+        if(!empty($template)) {
+            ob_start();
+            $this->message = include './html/mailtemplates/' . $template;
+            ob_end_flush();
+        } elseif(!empty($message)) {
+            $this->message = $message;
+        }
     }
-    
-    
-    //get object
-    public function getObject() {
-        return $this->object;
+
+    public function setUsername($username = null) {
+        if(!empty($username)) {
+            $this->phpmailer->Username = $username;
+        } else {
+            $this->phpmailer->Username = $this->configArray['gmail_user'];
+        }
     }
-    
-    private function addHeader($header) {   
-        $this->headers .= $header;   
+
+    public function setPassword($password = null) {
+        if(!empty($password)) {
+            $this->phpmailer->Password = $password;
+        } else {
+            $this->phpmailer->Password = $this->configArray['gmail_pass'];
+        }
     }
-}
-?>
+} 
