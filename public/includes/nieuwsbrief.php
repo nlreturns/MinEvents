@@ -1,3 +1,7 @@
+<?php
+
+use minevents\app\classes\Mail;
+?>
 <div id="subnav">
     <div id="halvecirkel">
         <a href="?page=dashboard"><img src="img/home_button.png" /></a>
@@ -30,22 +34,80 @@
              */
 
             require "..\..\minevents\libs\PHPMailerAutoload.php";
-            require "..\..\minevents\libs\class.phpmailer.php";
-            require "..\app\classes\Mail.php";
-            
+            //require "..\..\minevents\libs\class.phpmailer.php";
+            //require "..\app\classes\Mail.php";
             //namespace minevents\public\includes\nieuwsbrief;
             //use minevents\app\classes\Mail;
-            
-            $mail = new Mail();
-            
+
             $CFG['smtp_debug'] = 2; //0 == off, 1 for client output, 2 for client and server
-            $CFG['smtp_debugoutput'] = 'html';
-            $CFG['smtp_server'] = 'smtp.gmail.com';
+            $CFG['debug_output'] = 'html';
+            $CFG['smtp_host'] = 'smtp.gmail.com';
             $CFG['smtp_port'] = '587';
-            $CFG['smtp_authenticate'] = true;
+            $CFG['smtp_auth'] = true;
             $CFG['smtp_username'] = 'noreplyminevents@gmail.com';
             $CFG['smtp_password'] = 'Carolien123';
             $CFG['smtp_secure'] = 'tls';
+            $CFG['gmail_user'] = 'noreplyminevents@gmail.com';
+            $CFG['gmail_pass'] = 'Carolien123';
+
+            //$mailer = new Mail(new PHPMailer, $CFG);
+
+            $mail = new PHPMailer();
+
+            if (isset($_POST['submit'])) {
+
+                //Tell PHPMailer to use SMTP
+                $mail->isSMTP();
+
+                //Enable SMTP debugging
+                // 0 = off (for production use)
+                // 1 = client messages
+                // 2 = client and server messages
+                $mail->SMTPDebug = 2;
+
+                //Ask for HTML-friendly debug output
+                $mail->Debugoutput = 'html';
+
+                //Set the hostname of the mail server
+                $mail->Host = 'mail.minevents.eu';
+
+                //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+                $mail->Port = 25;
+
+                //Set the encryption system to use - ssl (deprecated) or tls
+                $mail->SMTPSecure = 'tls';
+
+                //Whether to use SMTP authentication
+                $mail->SMTPAuth = true;
+
+                //Username to use for SMTP authentication - use full email address for gmail
+                $mail->Username = "noreply@minevents.eu";
+
+                //Password to use for SMTP authentication
+                $mail->Password = "y7ZuCuMsX";
+
+                //Set who the message is to be sent from
+                $mail->setFrom("noreply@minevents.eu", "Nieuwsbrief");
+
+                //Set who the message is to be sent to
+                $mail->addAddress($_POST['To_Email'], $_POST['To_Name']);
+
+                //Set the subject line
+                $mail->Subject = $_POST['Subject'];
+
+                //Read an HTML message body from an external file, convert referenced images to embedded,
+                //convert HTML into a basic plain-text alternative body
+                $mail->msgHTML($_POST['Message']);
+
+                $mail->addAttachment('../disney_frozen_500.jpg');
+
+                //send the message, check for errors
+                if (!$mail->send()) {
+                    echo "Mailer Error: " . $mail->ErrorInfo;
+                } else {
+                    echo "Message sent!";
+                }
+            }
 
             $from_name = (isset($_POST['From_Name'])) ? $_POST['From_Name'] : '';
             $from_email = (isset($_POST['From_Email'])) ? $_POST['From_Email'] : '';
@@ -55,17 +117,6 @@
             $bcc_email = (isset($_POST['bcc_Email'])) ? $_POST['bcc_Email'] : '';
             $subject = (isset($_POST['Subject'])) ? $_POST['Subject'] : '';
             $message = (isset($_POST['Message'])) ? $_POST['Message'] : '';
-            $test_type = (isset($_POST['test_type'])) ? $_POST['test_type'] : 'smtp';
-            $smtp_debug = (isset($_POST['smtp_debug'])) ? $_POST['smtp_debug'] : $CFG['smtp_debug'];
-            $smtp_server = (isset($_POST['smtp_server'])) ? $_POST['smtp_server'] : $CFG['smtp_server'];
-            $smtp_port = (isset($_POST['smtp_port'])) ? $_POST['smtp_port'] : $CFG['smtp_port'];
-            $smtp_secure = strtolower((isset($_POST['smtp_secure'])) ? $_POST['smtp_secure'] : $CFG['smtp_secure']);
-            $smtp_authenticate = (isset($_POST['smtp_authenticate'])) ?
-                    $_POST['smtp_authenticate'] : $CFG['smtp_authenticate'];
-            $authenticate_password = (isset($_POST['authenticate_password'])) ?
-                    $_POST['authenticate_password'] : $CFG['smtp_password'];
-            $authenticate_username = (isset($_POST['authenticate_username'])) ?
-                    $_POST['authenticate_username'] : $CFG['smtp_username'];
             ?>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -213,24 +264,6 @@
                             <table border="1" class="column">
                                 <tr>
                                     <td class="colleft">
-                                        <label for="From_Name"><strong>From</strong> Name</label>
-                                    </td>
-                                    <td class="colrite">
-                                        <input type="text" id="From_Name" name="From_Name" value="<?php echo $from_name; ?>"
-                                               style="width:95%;" autofocus placeholder="Your Name">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="colleft">
-                                        <label for="From_Email"><strong>From</strong> Email Address</label>
-                                    </td>
-                                    <td class="colrite">
-                                        <input type="text" id="From_Email" name="From_Email" value="<?php echo $from_email; ?>"
-                                               style="width:95%;" required placeholder="Your.Email@example.com">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="colleft">
                                         <label for="To_Name"><strong>To</strong> Name</label>
                                     </td>
                                     <td class="colrite">
@@ -245,28 +278,6 @@
                                     <td class="colrite">
                                         <input type="text" id="To_Email" name="To_Email" value="<?php echo $to_email; ?>"
                                                style="width:95%;" required placeholder="Recipients.Email@example.com">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="colleft">
-                                        <label for="cc_Email"><strong>CC Recipients</strong><br>
-                                            <small>(separate with commas)</small>
-                                        </label>
-                                    </td>
-                                    <td class="colrite">
-                                        <input type="text" id="cc_Email" name="cc_Email" value="<?php echo $cc_email; ?>"
-                                               style="width:95%;" placeholder="cc1@example.com, cc2@example.com">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="colleft">
-                                        <label for="bcc_Email"><strong>BCC Recipients</strong><br>
-                                            <small>(separate with commas)</small>
-                                        </label>
-                                    </td>
-                                    <td class="colrite">
-                                        <input type="text" id="bcc_Email" name="bcc_Email" value="<?php echo $bcc_email; ?>"
-                                               style="width:95%;" placeholder="bcc1@example.com, bcc2@example.com">
                                     </td>
                                 </tr>
                                 <tr>
@@ -290,12 +301,12 @@
                                     </td>
                                 </tr>
                             </table>
-                            <div style="margin:1em 0;">Test will include two attachments.</div>
+                            <div style="margin:1em 0;">Test will include one attachment.</div>
                         </fieldset>
+                        <input type="submit" value="Submit" name="submit">
                     </div>
-
-                    <?php echo 'Current PHP version: ' . phpversion(); ?>
-                </div>
+            </form>
+    </div>
     </div>
     </form>
     </body>

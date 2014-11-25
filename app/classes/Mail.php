@@ -2,7 +2,7 @@
 
 namespace minevents\app\classes;
 
-
+require "..\..\minevents\libs\class.phpmailer.php";
 
 
 class Mail {
@@ -11,15 +11,14 @@ class Mail {
     private $configArray;
     public $message;
 
-    public function __construct(\PHPMailer $PHPMailer, Configuration $config) {
+    public function __construct(\PHPMailer $PHPMailer, array $config) {
         $this->phpmailer = $PHPMailer;
-        $this->configArray = $config->getIniArray('Mail');
+        $this->configArray = $config;
         $this->setUsername();
         $this->setPassword();
     }
 
     private function setSMTP() {
-        $this->phpmailer->isSMTP();
         $this->phpmailer->Host = $this->configArray['smtp_host'];
         $this->phpmailer->Port = $this->configArray['smtp_port'];
         $this->phpmailer->SMTPDebug = $this->configArray['smtp_debug'];
@@ -29,7 +28,7 @@ class Mail {
     }
 
     public function sendMail() {
-        $this->setSMTP(new Configuration(CONFIG_FILE));
+        $this->setSMTP();
         $this->phpmailer->msgHTML($this->message);
         if (!$this->phpmailer->send()) {
             echo "Mailer Error: " . $this->phpmailer->ErrorInfo;
