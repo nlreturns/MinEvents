@@ -3,7 +3,9 @@
 <head>
     <title>M in Events</title>
     <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="style2.css">
     <script type="text/javascript" src="js/jquery-2.0.2.js"></script>
+    <script type="text/javascript" src="js/quill.js"></script>
 </head>
 <body>
     <header>
