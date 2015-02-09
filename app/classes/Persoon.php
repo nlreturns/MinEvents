@@ -66,12 +66,22 @@ class Persoon extends DbPersoon {
      * @var string
      */
     private $persoon_voornaam;
+    
+        /**
+     * De ID van de groep.
+     * @var int
+     */
+    private $groep_id;
 
     /**
      * Dit is de constructor. Hier zet ik de klasse variabelen aan de hand van een parameter.
      */
     public function construct() {
         parent::__construct();
+    }
+    
+    public function __set($attr,$value){
+        $this->$attr=$value;
     }
 
     // Getters
@@ -132,6 +142,20 @@ class Persoon extends DbPersoon {
     public function getPersoonList() {
         return $this->getPersoonListDb();
     }
+    
+    /**
+     * Get gebruikerlist.
+     * @return type PersoonListDb
+     */
+    public function getGroepList() {
+        return $this->getGroepListDb();
+    }
+    
+    public function getUsersByGroup($group_id){
+        return $this->getUsersByGroupDb($group_id);
+    }
+    
+    
 
     /**
      * Get persoon stad.
@@ -164,8 +188,23 @@ class Persoon extends DbPersoon {
     public function getVoornaam() {
         return $this->persoon_voornaam;
     }
+    
+    /**
+     * Get persoon voornaam.
+     * @return type persoon_groep
+     */
+    public function getGroepID() {
+        return $this->persoon_groep;
+    }
 
     //Setters
+    /**
+     * Set gebruiker ID.
+     */
+    public function setGroepID($groep_id) {
+        $this->groep_id = $groep_id;
+    }
+    
 
     /**
      * Set gebruiker ID.
@@ -251,12 +290,20 @@ class Persoon extends DbPersoon {
     public function deletePersoon() {
         $this->deletePersoonDb($this->persoon_id);
     }
+    
+    /**
+     * De update functie wordt gebruikt om een persoon id te updaten in de database.
+     */
+    public function updateGroepsnr ( $persoons_id, $groep_id ){
+         // Update persoon ID
+        $this->changeGroepDb($persoons_id, $groep_id); 
+    }
 
     /**
      * De update functie wordt gebruikt om een persoon uptedaten als er data veranderd.
      */
     public function updatePersoon() {
-        $this->updatePersoonDb($this->gebruiker_id, $this->persoon_achternaam, $this->persoon_voornaam, $this->persoon_email, $this->persoon_land, $this->persoon_stad, $this->persoon_straat, $this->persoon_telnummer, $this->persoon_id);
+        $this->updatePersoonDb( $this->persoon_achternaam, $this->persoon_voornaam, $this->persoon_email, $this->persoon_land, $this->persoon_stad, $this->persoon_straat, $this->persoon_telnummer, $this->persoon_id, $this->groep_id);
     }
 
 }

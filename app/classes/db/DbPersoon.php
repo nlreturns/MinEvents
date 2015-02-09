@@ -65,6 +65,12 @@ class DbPersoon extends Database {
      * @var string
      */
     private $persoon_voornaam;
+    
+    /**
+     * Dit is het id van een persoon.
+     * @var int
+     */
+    private $groep_id;
 
     /**
      * Calls Database's constructor. 
@@ -214,17 +220,17 @@ class DbPersoon extends Database {
      * @param type $persoon_id
      * @return boolean
      */
-    public function getPersoonById($persoon_id) {
+    public function getPersoonByIdDb($persoon_id) {
         // Query selecteert persoon aan de hand ingevoerde parameter.
         $query = "SELECT * FROM `persoon` WHERE 
             `persoon_id` =" . mysql_real_escape_string($persoon_id) . "";
         // haalt de array op aan de hand van database's fetchDbArray function.
         // als het null is,
-        if ($this->fetchDbArray($query) == NULL) {
+        if ($this->dbFetchArray($query) == NULL) {
             return FALSE;
         } else {
             // als het niet null is, return the array.
-            return $this->fetchDbArray($query);
+            return $this->dbFetchArray($query);
         }
     }
 
@@ -247,6 +253,57 @@ class DbPersoon extends Database {
         }
         return $result;
     }
+    
+    /**
+     * Gets de volledige database array.
+     * @return boolean
+     */
+    public function getGroepListDb() {
+        // Query selecteert de gebruiker aan de hand van class vars.
+        $query = "SELECT * FROM  `persoon_groep` ";
+        // haalt de array op aan de hand van database's fetchDbArray function.
+        // als het null is,
+        if (!$this->dbquery($query)) {
+            return false;
+        }
+        if(!($result = $this->dbFetchAll())){
+            // set error.
+            echo TXT_NO_DATA;
+            return FALSE;
+        }
+        return $result;
+    }
+    
+    public function getUsersByGroupDb($group_id){
+        $query = "SELECT * FROM `persoon` WHERE `persoon_groep` = " . $group_id;
+        // haalt de array op aan de hand van database's fetchDbArray function.
+        // als het null is,
+        if (!$this->dbquery($query)) {
+            return false;
+        }
+        if(!($result = $this->dbFetchAll())){
+            // set error.
+            echo TXT_NO_DATA;
+            return FALSE;
+        }
+        return $result;
+    }
+    
+    public function changeGroepDb ($persoon_id, $groep_id ){
+        
+        // check id
+        
+        $query = "UPDATE `persoon` 
+                    SET `persoon_groep` = '" . mysql_real_escape_string($groep_id) . "' WHERE                              
+                        `persoon_id` =" . $persoon_id;
+        if (!$this->dbquery($query)) {
+            return false;
+        } else {
+            $this->groep_id = $groep_id;
+            $this->persoon_id = $persoon_id;
+        }
+           
+    }
 
     /**
      * Update persoon.
@@ -261,11 +318,10 @@ class DbPersoon extends Database {
      * @param type $persoon_id
      * @return boolean
      */
-    public function updatePersoonDb($gebruiker_id, $persoon_voornaam, $persoon_achternaam, $persoon_email, $persoon_land, $persoon_stad, $persoon_straat, $persoon_telnummer, $persoon_id) {
+    public function updatePersoonDb($persoon_voornaam, $persoon_achternaam, $persoon_email, $persoon_land, $persoon_stad, $persoon_straat, $persoon_telnummer, $persoon_id) {
         // Query updates the item using inserted parameters. 
         $query = "UPDATE `persoon` 
-                    SET `gebruiker_id` = '" . mysql_real_escape_string($gebruiker_id) . "', 
-                        `persoon_voornaam` = '" . mysql_real_escape_string($persoon_voornaam) . "'
+                    SET `persoon_voornaam` = '" . mysql_real_escape_string($persoon_voornaam) . "'
                         `persoon_achternaam` = '" . mysql_real_escape_string($persoon_achternaam) . "', 
                         `persoon_email` = '" . mysql_real_escape_string($persoon_email) . "', 
                         `persoon_land` = '" . mysql_real_escape_string($persoon_land) . "', 

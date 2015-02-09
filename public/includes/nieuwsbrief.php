@@ -1,6 +1,11 @@
 <?php
 
 use minevents\app\classes\Mail;
+use minevents\app\classes\Persoon;
+
+$persoon = new Persoon;
+$groups = $persoon->getGroepList();
+
 ?>
 
 <div id="subnav">
@@ -44,20 +49,25 @@ use minevents\app\classes\Mail;
                         <table border="1" class="formulier">
                             <tr>
                                 <td class="colleft">
-                                    <label for="To_Name"><strong>Aan</strong> Naam</label>
-                                </td>
-                                <td class="colrite">
-                                    <input type="text" id="To_Name" name="To_Name" value="<?php echo $to_name; ?>"
-                                           style="width:60%;" placeholder="Ontvanger's naam">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="colleft">
                                     <label for="To_Email"><strong>Aan</strong> Email</label>
                                 </td>
                                 <td class="colrite">
                                     <input type="text" id="To_Email" name="To_Email" value="<?php echo $to_email; ?>"
-                                           style="width:60%;" required placeholder="Ontvanger.adres@example.com">
+                                           style="width:60%;" placeholder="Ontvanger.adres@example.com">
+                                </td>
+                            </tr><tr>
+                                <td class="colleft">
+                                    <label for="To_Email_Group"><strong>Aan</strong> Email</label>
+                                </td>
+                                <td class="colrite">
+                                    <select id="To_Email_Group" name="To_Email_Group">
+                                        <option value="0">Geen groep</option>
+                                        <?php 
+                                        foreach($groups as $group){
+                                            echo "<option value='".$group['persoon_groep_id']."'>".$group['persoon_groep_naam']."</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
@@ -75,8 +85,8 @@ use minevents\app\classes\Mail;
                                     </label>
                                 </td>
                                 <td class="colrite">
-                                    <div id="content-container">
-                                        <div id="editor-wrapper" style="width:75%;" textarea>
+                                    <div class="content-container">
+                                        <div class="editor-wrapper" style="width:75%;" textarea>
                                             <div id="formatting-container">
                                                 <select title="Font" class="ql-font">
                                                     <option value="sans-serif" selected>Sans Serif</option>
@@ -115,59 +125,66 @@ use minevents\app\classes\Mail;
                                                     <option value="right">Rechts</option>
                                                     <option value="justify">Justify</option>
                                                 </select>
-                                                <button type="button" style="color: black" title="Bold" class="ql-format-button ql-bold" >Dikgedrukt</button>
-                                                <button type="button" style="color: black" title="Italic" class="ql-format-button ql-italic">Schuingedrukt</button>
-                                                <button type="button" style="color: black" title="Underline" class="ql-format-button ql-underline">Onderlijnd</button>
-                                                <button type="button" style="color: black" title="Strikethrough" class="ql-format-button ql-strike">Doorstreept</button>
-                                                <button type="button" style="color: black" title="Link" class="ql-format-button ql-link">Link</button>
-                                                <button type="button" style="color: black" title="Image" class="ql-format-button ql-image">Plaatje</button>
-                                                <button type="button" style="color: black" title="Bullet" class="ql-format-button ql-bullet">Puntenlijst</button>
-                                                <button type="button" style="color: black" title="List" class="ql-format-button ql-list">Nummerieklijst</button>
+                                                <button type="button" style="color: black" title="Bold" class="ql-bold" >Dikgedrukt</button>
+                                                <button type="button" style="color: black" title="Italic" class="ql-italic">Schuingedrukt</button>
+                                                <button type="button" style="color: black" title="Underline" class="ql-underline">Onderlijnd</button>
+                                                <button type="button" style="color: black" title="Strikethrough" class="ql-strike">Doorstreept</button>
+                                                <button type="button" style="color: black" title="Link" class="ql-link">Link</button>
+                                                <button type="button" style="color: black" title="Image" class="ql-image">Plaatje</button>
+                                                <button type="button" style="color: black" title="Bullet" class="ql-bullet">Puntenlijst</button>
+                                                <button type="button" style="color: black" title="List" class="ql-list">Nummerieklijst</button>
                                             </div>
                                             <div id="editor-container"></div>
                                         </div>
                                     </div>
 
-                                    <script type="text/javascript" src="../js/quill.js"></script>
-
                                 </td>
                             </tr>
                         </table>
 
-                        <input type="button" value="Versturen" name="submit" onclick="sendData();">
+                        <input type="button" class="knopje" value="Versturen" name="submit" onclick="sendData();">
 
                     </div>
+                    
+                    <script type="text/javascript" src="js/jquery-2.0.2.js"></script>
+                    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+                    <script type="text/javascript" src="js/quill.js"></script>
+
                     <script type="text/javascript">
-                        var editor = new Quill('#editor-container', {
-                            modules: {
-                                'toolbar': {container: '#formatting-container'},
-                                'link-tooltip': true,
-                                'image-tooltip': true
+                            var editor = new Quill('#editor-container', {
+                             
+                             modules: {
+                             'toolbar': {container: '#formatting-container'},
+                             'link-tooltip': true,
+                             'image-tooltip': true
+                             }
+                             });
+                             editor.addModule('toolbar', {
+                             container: '#toolbar'
+                             });
+                             editor.on('selection-change', function(range) {
+                             //console.log('selection-change', range)
+                             });
+                             editor.on('text-change', function(delta, source) {
+                             //console.log('text-change', delta, source);
+                             }); 
+
+                            function sendData() {
+                                
+                                var html = editor.getHTML();
+
+                                var To_Email = $('#To_Email').val();
+                                
+                                var To_Email_Group = $('#To_Email_Group').val();
+
+                                var Subject = $('#Subject').val();
+                                //To_Name:To_Name,To_Email:To_Email,Subject:Subject
+                                $.post('includes/validate.php', {To_Email_Group : To_Email_Group, To_Email: To_Email, Subject: Subject, html: html},
+                                function(data) {
+                                    $('#result2').html(data);
+                                });
+
                             }
-                        });
-                        editor.on('selection-change', function(range) {
-                            //console.log('selection-change', range)
-                        });
-                        editor.on('text-change', function(delta, source) {
-                            //console.log('text-change', delta, source);
-                        });
-
-                        function sendData() {
-
-                            var html = editor.getHTML();
-
-                            var To_Name = $('#To_Name').val();
-
-                            var To_Email = $('#To_Email').val();
-
-                            var Subject = $('#Subject').val();
-                            //To_Name:To_Name,To_Email:To_Email,Subject:Subject
-                            $.post('includes/validate.php', {To_Name: To_Name, To_Email: To_Email, Subject: Subject, html: html},
-                            function(data) {
-                                $('#result2').html(data);
-                            });
-
-                        }
                     </script>
             </form>
     </div>
@@ -175,8 +192,6 @@ use minevents\app\classes\Mail;
     </form>
     </body>
     </html>
-
-
 
 
     </p>
